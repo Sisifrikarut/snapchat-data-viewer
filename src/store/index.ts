@@ -16,7 +16,9 @@ export default createStore({
         zip.loadAsync(buffer).then((zip) => {
           zip.forEach((relativePath, zipEntry) => {
             if (relativePath.endsWith("account.json")) {
-              this.parseAccount(state, zipEntry);
+              // eslint-disable-next-line
+              // @ts-ignore
+              this.commit("parseAccount", zipEntry);
             }
           });
         });

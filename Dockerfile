@@ -5,7 +5,7 @@ WORKDIR /vue-ui
 
 # Copy the files and install dependencies
 COPY . .
-RUN yarn install && yarn build
+RUN yarn install && yarn jest && yarn build
 
 FROM nginx:alpine as production-build
 COPY ./.nginx/nginx.conf /etc/nginx/nginx.conf

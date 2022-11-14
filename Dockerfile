@@ -1,5 +1,5 @@
 # stage1 as builder
-FROM node:10-alpine as builder
+FROM node:14-alpine as builder
 
 WORKDIR /vue-ui
 

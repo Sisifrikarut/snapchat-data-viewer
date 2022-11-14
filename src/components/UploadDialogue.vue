@@ -48,7 +48,6 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import * as zip from "jszip";
 
 @Options({
   props: {
@@ -62,26 +61,12 @@ import * as zip from "jszip";
     togglePopup() {
       this.popupActive = !this.popupActive;
     },
-    parseZipBuffer(buffer: ArrayBuffer | null) {
-      if (buffer) {
-        zip.loadAsync(buffer).then((zip) => {
-          zip.forEach((relativePath, zipEntry) => {
-            if (relativePath.endsWith("account.json")) {
-              zipEntry.async("string").then((data) => {
-                const account = JSON.parse(data);
-                this.$store.commit("parseAccount", account);
-              });
-            }
-          });
-          this.popupActive = false;
-        });
-      }
-    },
     upload() {
       let reader = new FileReader();
       reader.onload = (e) => {
         if (e.target) {
-          this.parseZipBuffer(e.target.result as ArrayBuffer | null);
+          this.$store.commit("parseZipData", e.target.result);
+          this.popupActive = false;
         }
       };
       reader.readAsArrayBuffer(this.file[0]);

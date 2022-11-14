@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-model="drawer">
+    <v-navigation-drawer v-if="$store.state.uploaded" v-model="drawer">
       <v-list nav>
         <v-list-item
           v-for="(item, index) in pages"
@@ -13,7 +13,10 @@
     </v-navigation-drawer>
 
     <v-app-bar>
-      <v-app-bar-nav-icon @click="toggleDrawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon
+        v-show="$store.state.uploaded"
+        @click="toggleDrawer"
+      ></v-app-bar-nav-icon>
 
       <v-app-bar-title icon="mdi-vuetify" @click="navigate('/')"
         >snapchat data viewer</v-app-bar-title
@@ -47,7 +50,7 @@ import { useTheme } from "vuetify";
 @Options({
   name: "App",
   data: () => ({
-    drawer: false,
+    drawer: true,
     theme: useTheme(),
     pages: [
       {
@@ -67,14 +70,14 @@ import { useTheme } from "vuetify";
       window.open("https://github.com/0x280/snapchat-data-viewer");
     },
     toggleTheme() {
-      this.theme.name = this.theme.current.dark ? "light" : "dark";
+      this.theme.global.name = this.theme.current.dark ? "light" : "dark";
       localStorage.theme = this.theme.name;
     },
     toggleDrawer() {
       this.drawer = !this.drawer;
     },
     navigate(path: string) {
-      this.$router.push(path).expect();
+      this.$router.push(path).catch();
     },
   },
   mounted() {

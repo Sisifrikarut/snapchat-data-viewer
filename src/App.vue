@@ -1,12 +1,47 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view />
+  <v-app>
+    <v-navigation-drawer v-model="drawer"> </v-navigation-drawer>
+    <v-app-bar>
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+
+      <v-app-bar-title icon="mdi-vuetify">snapchat data viewer</v-app-bar-title>
+
+      <v-spacer></v-spacer>
+
+      <v-btn icon @click="window.open("https://github.com/0x280/snapchat-data-viewer")">
+        <v-icon>mdi-github</v-icon>
+      </v-btn>
+    </v-app-bar>
+    <v-main>
+      <router-view id="router-view" v-slot="{ Component }">
+        <transition name="fade" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
+    </v-main>
+  </v-app>
 </template>
 
+<script lang="ts">
+import { Options, Vue } from "vue-class-component";
+@Options({
+  data: () => ({
+    drawer: true,
+  }),
+})
+export default class App extends Vue {}
+</script>
+
 <style lang="scss">
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.125s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

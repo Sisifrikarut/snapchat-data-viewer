@@ -62,7 +62,7 @@ import * as zip from "jszip";
     togglePopup() {
       this.popupActive = !this.popupActive;
     },
-    onUploadComplete(buffer: ArrayBuffer | null) {
+    parseZipBuffer(buffer: ArrayBuffer | null) {
       if (buffer) {
         zip.loadAsync(buffer).then((zip) => {
           zip.forEach((relativePath, zipEntry) => {
@@ -81,7 +81,7 @@ import * as zip from "jszip";
       let reader = new FileReader();
       reader.onload = (e) => {
         if (e.target) {
-          this.onUploadComplete(e.target.result);
+          this.parseZipBuffer(e.target.result as ArrayBuffer | null);
         }
       };
       reader.readAsArrayBuffer(this.file[0]);

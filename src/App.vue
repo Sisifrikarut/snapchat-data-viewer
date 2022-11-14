@@ -2,13 +2,16 @@
   <v-app>
     <v-navigation-drawer v-model="drawer"> </v-navigation-drawer>
     <v-app-bar>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click="toggleDrawer"></v-app-bar-nav-icon>
 
       <v-app-bar-title icon="mdi-vuetify">snapchat data viewer</v-app-bar-title>
 
       <v-spacer></v-spacer>
 
-      <v-btn icon @click="window.open("https://github.com/0x280/snapchat-data-viewer")">
+      <v-btn icon @click="toggleTheme">
+        <v-icon>mdi-moon-waxing-crescent</v-icon>
+      </v-btn>
+      <v-btn icon @click="openRemote">
         <v-icon>mdi-github</v-icon>
       </v-btn>
     </v-app-bar>
@@ -24,10 +27,30 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
+import { useTheme } from "vuetify";
 @Options({
+  name: "App",
   data: () => ({
     drawer: true,
+    theme: useTheme(),
   }),
+  methods: {
+    openRemote() {
+      window.open("https://github.com/0x280/snapchat-data-viewer");
+    },
+    toggleTheme() {
+      this.theme.name = this.theme.current.dark ? "light" : "dark";
+      localStorage.theme = this.theme.name;
+    },
+    toggleDrawer() {
+      this.drawer = !this.drawer;
+    },
+  },
+  mounted() {
+    if (localStorage.theme) {
+      this.theme.name = localStorage.theme;
+    }
+  },
 })
 export default class App extends Vue {}
 </script>

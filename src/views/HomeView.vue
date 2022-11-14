@@ -1,18 +1,28 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <UploadDialogue msg="view your snapchat userdata" />
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
+import UploadDialogue from "@/components/UploadDialogue.vue"; // @ is an alias to /src
 
 @Options({
   components: {
-    HelloWorld,
+    UploadDialogue,
   },
 })
 export default class HomeView extends Vue {}
 </script>
+
+<style lang="scss" scoped>
+.home {
+  margin-inline: 1rem;
+  text-align: center;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>

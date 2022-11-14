@@ -1,5 +1,7 @@
 <template>
-  <div class="account"></div>
+  <div class="account">
+    {{ JSON.stringify(state.account) }}
+  </div>
 </template>
 
 <script lang="ts">

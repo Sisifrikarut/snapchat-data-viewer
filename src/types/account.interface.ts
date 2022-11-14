@@ -1,7 +1,7 @@
 export interface ExportAccount {
   "Basic Information": {
     Username: string;
-    Email: string;
+    Name: string;
     "Creation Date": string;
   };
   "Device Information": {
@@ -34,7 +34,7 @@ export interface ExportAccount {
 
 export interface Account {
   username: string;
-  email: string;
+  name: string;
   creationDate: Date;
   currentDevice: {
     make: string;
@@ -57,5 +57,5 @@ export interface Account {
     country: string;
     createdAt: Date;
     status: string;
-  };
+  }[];
 }

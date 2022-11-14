@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <UploadDialogue msg="view your snapchat userdata" />
+    <UploadDialogue msg="visualize your snapchat userdata" />
   </div>
 </template>
 

@@ -1,18 +1,11 @@
 # stage1 as builder
-FROM node:19-alpine as builder
+FROM node:10-alpine as builder
 
 WORKDIR /vue-ui
 
-# Copy the package.json and install dependencies
-COPY package*.json ./
-RUN yarn install
-
-# Copy rest of the files
+# Copy the files and install dependencies
 COPY . .
-
-# Build the project
-RUN yarn build
-
+RUN yarn install && yarn build
 
 FROM nginx:alpine as production-build
 COPY ./.nginx/nginx.conf /etc/nginx/nginx.conf

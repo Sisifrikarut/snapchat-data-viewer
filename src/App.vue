@@ -1,20 +1,36 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-model="drawer"> </v-navigation-drawer>
+    <v-navigation-drawer v-model="drawer">
+      <v-list nav>
+        <v-list-item
+          v-for="(item, index) in pages"
+          :key="index"
+          :prepend-icon="item.icon"
+          :to="item.to"
+          :title="item.title"
+        ></v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
     <v-app-bar>
       <v-app-bar-nav-icon @click="toggleDrawer"></v-app-bar-nav-icon>
 
-      <v-app-bar-title icon="mdi-vuetify">snapchat data viewer</v-app-bar-title>
+      <v-app-bar-title icon="mdi-vuetify" @click="navigate('/')"
+        >snapchat data viewer</v-app-bar-title
+      >
 
       <v-spacer></v-spacer>
 
-      <v-btn icon @click="toggleTheme">
-        <v-icon>mdi-moon-waxing-crescent</v-icon>
-      </v-btn>
-      <v-btn icon @click="openRemote">
-        <v-icon>mdi-github</v-icon>
-      </v-btn>
+      <v-col>
+        <v-btn icon @click="toggleTheme">
+          <v-icon>mdi-moon-waxing-crescent</v-icon>
+        </v-btn>
+        <v-btn icon @click="openRemote">
+          <v-icon>mdi-github</v-icon>
+        </v-btn>
+      </v-col>
     </v-app-bar>
+
     <v-main>
       <router-view id="router-view" v-slot="{ Component }">
         <transition name="fade" mode="out-in">
@@ -31,8 +47,20 @@ import { useTheme } from "vuetify";
 @Options({
   name: "App",
   data: () => ({
-    drawer: true,
+    drawer: false,
     theme: useTheme(),
+    pages: [
+      {
+        title: "Home",
+        icon: "mdi-home",
+        to: "/",
+      },
+      {
+        title: "Account",
+        icon: "mdi-account",
+        to: "/account",
+      },
+    ],
   }),
   methods: {
     openRemote() {
@@ -44,6 +72,9 @@ import { useTheme } from "vuetify";
     },
     toggleDrawer() {
       this.drawer = !this.drawer;
+    },
+    navigate(path: string) {
+      this.$router.push(path).expect();
     },
   },
   mounted() {
@@ -60,6 +91,7 @@ export default class App extends Vue {}
 .fade-leave-active {
   transition: opacity 0.125s ease;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;

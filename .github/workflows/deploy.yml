@@ -1,4 +1,4 @@
-name: Deploy
+name: docker_deploy
 
 on:
   workflow_run:

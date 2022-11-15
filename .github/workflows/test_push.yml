@@ -1,0 +1,9 @@
+name: test_push
+
+on:
+  push:
+    branches: [ "**" ]
+
+jobs:
+  call-sub-workflow:
+    uses: 0x280/snapchat-data-viewer/.github/workflows/test_base.yml@main

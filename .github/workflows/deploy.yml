@@ -1,16 +1,17 @@
-name: Docker Image CI
+name: docker_deploy
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  workflow_run:
+    workflows: ["test_push"]
+    branches: main
+    types: completed
 
 jobs:
-
   build:
-
+    name: Deployment
     runs-on: ubuntu-latest
+
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
     - uses: actions/checkout@v3

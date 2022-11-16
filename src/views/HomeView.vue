@@ -1,6 +1,21 @@
 <template>
   <div class="home">
-    <UploadDialogue msg="visualize your snapchat userdata" />
+    <div class="home-content-container">
+      <h1>visualize your snapchat userdata</h1>
+      <p>
+        You can request your snapchat userdata at the
+        <a
+          href="https://accounts.snapchat.com/accounts/downloadmydata"
+          target="_blank"
+          rel="noopener"
+        >
+          snapchat webinterface</a
+        >.
+        <br />
+        This might take a few hours to multiple days.
+      </p>
+      <UploadDialogue />
+    </div>
   </div>
 </template>
 

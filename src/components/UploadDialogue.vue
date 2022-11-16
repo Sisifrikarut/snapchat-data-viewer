@@ -1,18 +1,5 @@
 <template>
   <div class="upload">
-    <h1>{{ msg }}</h1>
-    <p>
-      You can request your snapchat userdata at the
-      <a
-        href="https://accounts.snapchat.com/accounts/downloadmydata"
-        target="_blank"
-        rel="noopener"
-      >
-        snapchat webinterface</a
-      >.
-      <br />
-      This might take a few hours to multiple days.
-    </p>
     <v-btn
       :loading="popupActive"
       class="ma-2"
@@ -21,7 +8,7 @@
     >
       Upload
     </v-btn>
-    <v-dialog v-model="popupActive">
+    <v-dialog v-model="popupActive" max-width="70vw">
       <v-container>
         <v-row>
           <v-col>
@@ -50,9 +37,6 @@
 import { Options, Vue } from "vue-class-component";
 
 @Options({
-  props: {
-    msg: String,
-  },
   data: () => ({
     popupActive: false,
     file: [],
@@ -73,9 +57,7 @@ import { Options, Vue } from "vue-class-component";
     },
   },
 })
-export default class UploadDialogue extends Vue {
-  msg!: string;
-}
+export default class UploadDialogue extends Vue {}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

@@ -1,6 +1,11 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-if="$store.state.uploaded" v-model="drawer">
+    <v-navigation-drawer
+      v-if="$store.state.uploaded"
+      v-model="drawer"
+      floating
+      elevation="8"
+    >
       <v-list nav>
         <v-list-item
           v-for="(item, index) in pages"

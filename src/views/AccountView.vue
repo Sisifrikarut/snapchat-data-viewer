@@ -2,18 +2,19 @@
   <div class="account">
     <v-container v-if="uploaded">
       <v-row justify="space-around">
-        <v-card min-width="50vw">
+        <v-card min-width="40vw">
           <v-card-title>Login-History</v-card-title>
           <v-card-text>
-            <v-timeline align="center" density="comfortable">
+            <v-timeline align="center">
               <v-timeline-item
                 v-for="(item, i) in account.loginHistory"
                 :key="i"
+                dot-color="primary"
                 size="small"
               >
-                <v-card flat>
-                  <v-card-title class="text-primary">
-                    {{ item.ip }}
+                <v-card variant="text" width="fit-content">
+                  <v-card-title class="text-primary"
+                    >{{ item.ip }}
                   </v-card-title>
                   <v-card-subtitle>
                     {{ item.createdAt.toLocaleString() }}
@@ -23,8 +24,9 @@
                     <v-chip
                       class="ma-2"
                       :color="item.status == 'success' ? 'success' : 'error'"
-                      >{{ item.status }}</v-chip
                     >
+                      {{ item.status }}
+                    </v-chip>
                   </v-card-text>
                 </v-card>
               </v-timeline-item>

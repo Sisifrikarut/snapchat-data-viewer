@@ -68,6 +68,11 @@ import { useTheme } from "vuetify";
         icon: "mdi-account",
         to: "/account",
       },
+      {
+        title: "Devices",
+        icon: "mdi-cellphone",
+        to: "/devices",
+      },
     ],
   }),
   methods: {

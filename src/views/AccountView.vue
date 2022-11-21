@@ -54,9 +54,7 @@ import { Options, Vue } from "vue-class-component";
 import { Account } from "@/types/account.interface";
 
 @Options({
-  data: () => ({
-    colors: ["cyan", "green", "pink", "amber", "orange"],
-  }),
+  data: () => ({}),
   computed: {
     state() {
       return this.$store.state;

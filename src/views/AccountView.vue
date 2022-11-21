@@ -1,13 +1,18 @@
 <template>
   <div class="account">
     <v-container v-if="uploaded">
-      <v-row justify="space-around">
+      <v-row justify="space-around" class="ma-5">
         <v-card min-width="40vw">
-          <v-card-title>Account</v-card-title>
-          <v-card-text></v-card-text>
+          <v-card-title>{{ account.username }}</v-card-title>
+          <v-card-subtitle>{{ account.name }}</v-card-subtitle>
+          <v-card-text>
+            <v-chip class="ma-2">{{
+              account.creationDate.toLocaleString()
+            }}</v-chip>
+          </v-card-text>
         </v-card>
       </v-row>
-      <v-row justify="space-around">
+      <v-row justify="space-around" class="ma-5">
         <v-card min-width="40vw">
           <v-card-title>Login-History</v-card-title>
           <v-card-text>

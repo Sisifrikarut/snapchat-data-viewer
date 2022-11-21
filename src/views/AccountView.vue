@@ -3,6 +3,12 @@
     <v-container v-if="uploaded">
       <v-row justify="space-around">
         <v-card min-width="40vw">
+          <v-card-title>Account</v-card-title>
+          <v-card-text></v-card-text>
+        </v-card>
+      </v-row>
+      <v-row justify="space-around">
+        <v-card min-width="40vw">
           <v-card-title>Login-History</v-card-title>
           <v-card-text>
             <v-timeline align="center">

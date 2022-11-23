@@ -60,6 +60,9 @@ export default createStore({
             status: login.Status,
           })),
         };
+        state.account.deviceHistory.sort(
+          (a, b) => b.startTime.getTime() - a.startTime.getTime()
+        );
       });
     },
   },

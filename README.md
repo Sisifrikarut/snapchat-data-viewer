@@ -43,5 +43,5 @@ docker run \
     -dp 3435:80 \
     --restart=always \
     --name snapchat_data_viewer\
-    x280/snapchat-data-viewer
+    ghcr.io/0x280/snapchat-data-viewer
 ```

@@ -17,5 +17,4 @@ RUN rm -rf /usr/share/nginx/html/*
 COPY --from=builder /vue-ui/dist /usr/share/nginx/html
 
 EXPOSE 80
-EXPOSE 443
 ENTRYPOINT ["nginx", "-g", "daemon off;"]

@@ -1,4 +1,4 @@
-# snapchat-data-viewer
+# snapchat-data-viewer (wip)
 
 ## Project setup
 

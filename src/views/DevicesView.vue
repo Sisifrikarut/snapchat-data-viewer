@@ -33,7 +33,7 @@
       </v-row>
       <v-row justify="space-around" class="ma-5">
         <v-card min-width="40vw">
-          <v-card-title>Login-History</v-card-title>
+          <v-card-title>Device-History</v-card-title>
           <v-card-text>
             <v-timeline align="center">
               <v-timeline-item

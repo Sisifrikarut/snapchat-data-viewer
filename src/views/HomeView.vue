@@ -12,7 +12,7 @@
           snapchat webinterface</a
         >.
         <br />
-        This might take a few hours to multiple days.
+        This might take a few hours.
       </p>
       <UploadDialogue />
     </div>

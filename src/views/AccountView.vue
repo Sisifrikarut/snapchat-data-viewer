@@ -139,7 +139,8 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import { Account, AccountHistory } from "@/types/account.interface";
+import { Account } from "@/types/account.interface";
+import { AccountHistory } from "@/types/account_history.interface";
 
 @Options({
   data: () => ({}),

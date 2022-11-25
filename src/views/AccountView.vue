@@ -6,12 +6,100 @@
           <v-card-title>{{ account.username }}</v-card-title>
           <v-card-subtitle>{{ account.name }}</v-card-subtitle>
           <v-card-text>
-            <v-chip class="ma-2">{{
-              account.creationDate.toLocaleString()
-            }}</v-chip>
+            <v-chip color="secondary" class="ma-2">
+              {{ account.creationDate.toLocaleString() }}
+            </v-chip>
+
+            <br />
+
+            <v-chip color="primary" class="ma-2">
+              {{ accountHistory.mobileNumberChanges[0].mobileNumber }}
+            </v-chip>
+
+            <br />
+
+            <v-chip color="primary" class="ma-2">
+              {{ accountHistory.emailChanges[0].email }}
+            </v-chip>
           </v-card-text>
         </v-card>
       </v-row>
+
+      <v-row justify="space-around" class="ma-5">
+        <v-card min-width="40vw">
+          <v-card-title>Name-History</v-card-title>
+          <v-card-text>
+            <v-timeline align="center">
+              <v-timeline-item
+                v-for="(item, i) in accountHistory.nameChanges"
+                :key="i"
+                dot-color="primary"
+                size="small"
+              >
+                <v-card variant="text" width="fit-content">
+                  <v-card-title class="text-primary"
+                    >{{ item.name }}
+                  </v-card-title>
+                  <v-card-subtitle>
+                    {{ item.date.toLocaleString() }}
+                  </v-card-subtitle>
+                </v-card>
+              </v-timeline-item>
+            </v-timeline>
+          </v-card-text>
+        </v-card>
+      </v-row>
+
+      <v-row justify="space-around" class="ma-5">
+        <v-card min-width="40vw">
+          <v-card-title>Number-History</v-card-title>
+          <v-card-text>
+            <v-timeline align="center">
+              <v-timeline-item
+                v-for="(item, i) in accountHistory.mobileNumberChanges"
+                :key="i"
+                dot-color="primary"
+                size="small"
+              >
+                <v-card variant="text" width="fit-content">
+                  <v-card-title class="text-primary"
+                    >{{ item.mobileNumber }}
+                  </v-card-title>
+                  <v-card-subtitle>
+                    {{ item.date.toLocaleString() }}
+                  </v-card-subtitle>
+                </v-card>
+              </v-timeline-item>
+            </v-timeline>
+          </v-card-text>
+        </v-card>
+      </v-row>
+
+      <v-row justify="space-around" class="ma-5">
+        <v-card min-width="40vw">
+          <v-card-title>E-Mail History</v-card-title>
+          <v-card-text>
+            <v-timeline align="center">
+              <v-timeline-item
+                v-for="(item, i) in accountHistory.emailChanges"
+                :key="i"
+                dot-color="primary"
+                size="small"
+              >
+                <v-card variant="text" width="fit-content">
+                  <v-card-title class="text-primary"
+                    >{{ item.email }}
+                  </v-card-title>
+                  <v-card-subtitle>
+                    {{ item.date.toLocaleString() }}
+                  </v-card-subtitle>
+                </v-card>
+              </v-timeline-item>
+            </v-timeline>
+          </v-card-text>
+        </v-card>
+      </v-row>
+
       <v-row justify="space-around" class="ma-5">
         <v-card min-width="40vw">
           <v-card-title>Login-History</v-card-title>
@@ -51,7 +139,7 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import { Account } from "@/types/account.interface";
+import { Account, AccountHistory } from "@/types/account.interface";
 
 @Options({
   data: () => ({}),
@@ -61,6 +149,9 @@ import { Account } from "@/types/account.interface";
     },
     account() {
       return this.state.account as Account;
+    },
+    accountHistory() {
+      return this.state.accountHistory as AccountHistory;
     },
     uploaded() {
       return this.state.uploaded;

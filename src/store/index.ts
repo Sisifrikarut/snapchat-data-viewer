@@ -1,10 +1,10 @@
 import { createStore } from "vuex";
+import { ExportAccount, Account } from "@/types/account.interface";
 import {
-  Account,
-  AccountHistory,
-  ExportAccount,
   ExportAccountHistory,
-} from "@/types/account.interface";
+  AccountHistory,
+} from "@/types/account_history.interface";
+import { ExportUserProfile, UserProfile } from "@/types/user_profile.interface";
 import * as zip from "jszip";
 
 export default createStore({
@@ -12,10 +12,13 @@ export default createStore({
     uploaded: false,
     account: undefined as Account | undefined,
     accountHistory: undefined as AccountHistory | undefined,
+    userProfile: undefined as UserProfile | undefined,
   },
   getters: {
     account: (state) => state.account,
     accountHistory: (state) => state.accountHistory,
+    userProfile: (state) => state.userProfile,
+    uploaded: (state) => state.uploaded,
   },
   mutations: {
     parseZipData(state, buffer: ArrayBuffer | null) {
@@ -31,6 +34,11 @@ export default createStore({
               zipEntry.async("string").then((data) => {
                 const accountHistory = JSON.parse(data) as ExportAccountHistory;
                 state.accountHistory = new AccountHistory(accountHistory);
+              });
+            } else if (relativePath.endsWith("user_profile.json")) {
+              zipEntry.async("string").then((data) => {
+                const userProfile = JSON.parse(data) as ExportUserProfile;
+                state.userProfile = new UserProfile(userProfile);
               });
             }
           });

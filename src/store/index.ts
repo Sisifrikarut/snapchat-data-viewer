@@ -6,6 +6,7 @@ import {
 } from "@/types/account_history.interface";
 import { ExportUserProfile, UserProfile } from "@/types/user_profile.interface";
 import * as zip from "jszip";
+import { ChatHistory, ExportChatHistory } from "@/types/chat_history.interface";
 
 export default createStore({
   state: {
@@ -13,12 +14,14 @@ export default createStore({
     account: undefined as Account | undefined,
     accountHistory: undefined as AccountHistory | undefined,
     userProfile: undefined as UserProfile | undefined,
+    chatHistory: undefined as ChatHistory[] | undefined,
   },
   getters: {
     account: (state) => state.account,
     accountHistory: (state) => state.accountHistory,
     userProfile: (state) => state.userProfile,
     uploaded: (state) => state.uploaded,
+    chatHistory: (state) => state.chatHistory,
   },
   mutations: {
     parseZipData(state, buffer: ArrayBuffer | null) {
@@ -39,6 +42,10 @@ export default createStore({
               zipEntry.async("string").then((data) => {
                 const userProfile = JSON.parse(data) as ExportUserProfile;
                 state.userProfile = new UserProfile(userProfile);
+              });
+            } else if (relativePath.endsWith("chat_history.json")) {
+              zipEntry.async("string").then((data) => {
+                const chatHistories = JSON.parse(data) as ExportChatHistory;
               });
             }
           });

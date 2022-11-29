@@ -1,4 +1,4 @@
-name: test_push
+name: test_pr
 
 on:
   pull_request:

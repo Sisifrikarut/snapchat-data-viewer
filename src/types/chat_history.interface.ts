@@ -35,12 +35,15 @@ export class ChatMessage {
   timestamp: Date;
   contentType: ChatMessageContentType;
   content: string | undefined;
+  title: string;
 
   constructor(msg: ExportOutgoingChatMessage | ExportIngoingChatMessage) {
     if (((msg as never)["From"] as string | undefined) != undefined) {
       this.type = ChatMessageType.Ingoing;
+      this.title = (msg as never)["From"] as string;
     } else {
       this.type = ChatMessageType.Outgoing;
+      this.title = (msg as never)["To^"] as string;
     }
 
     this.timestamp = new Date(msg.Created.replace(" UTC", "Z"));

@@ -6,7 +6,12 @@ import {
 } from "@/types/account_history.interface";
 import { ExportUserProfile, UserProfile } from "@/types/user_profile.interface";
 import * as zip from "jszip";
-import { ChatHistory, ExportChatHistory } from "@/types/chat_history.interface";
+import {
+  ChatHistory,
+  ChatMessage,
+  ExportChatHistory,
+  ExportIngoingChatMessage,
+} from "@/types/chat_history.interface";
 
 export default createStore({
   state: {
@@ -46,6 +51,47 @@ export default createStore({
             } else if (relativePath.endsWith("chat_history.json")) {
               zipEntry.async("string").then((data) => {
                 const chatHistories = JSON.parse(data) as ExportChatHistory;
+                const chats = [] as ChatHistory[];
+
+                // eslint-disable-next-line prettier/prettier
+                const messages =
+                  chatHistories["Received Saved Chat History"]
+                  .map((v) => new ChatMessage(v))
+                  .concat(
+                    chatHistories["Received Unsaved Chat History"].map(
+                      (v) => new ChatMessage(v)
+                    )
+                  )
+                  .concat(
+                    chatHistories["Sent Saved Chat History"].map(
+                      (v) => new ChatMessage(v)
+                    )
+                  )
+                  .concat(
+                    chatHistories["Received Unsaved Chat History"].map(
+                      (v) => new ChatMessage(v)
+                    )
+                  );
+
+                messages.forEach((m) => {
+                  const history = chats.find((e) => e.name == m.title);
+                  if (history == undefined) {
+                    chats.push({
+                      name: m.title,
+                      messages: [m],
+                    });
+                  } else {
+                    history.messages.push(m);
+                  }
+                });
+
+                chats.forEach((c) => {
+                  c.messages.sort(
+                    (a, b) => b.timestamp.getTime() - a.timestamp.getTime()
+                  );
+                  c.messages = c.messages.reverse();
+                });
+                state.chatHistory = chats;
               });
             }
           });

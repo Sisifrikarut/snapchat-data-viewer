@@ -73,6 +73,11 @@ import { useTheme } from "vuetify";
         icon: "mdi-cellphone",
         to: "/devices",
       },
+      {
+        title: "Chats",
+        icon: "mdi-chat",
+        to: "/chats",
+      },
     ],
   }),
   methods: {
